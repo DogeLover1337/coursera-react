@@ -15,17 +15,22 @@ function RenderDish({dish}){
     );
 }
 
-function RenderComments({comments}){
-    return(comments.map((comments)=>{
-        return(
-        <div key={comments.id}>
-            <ul className="list-unstyled">
-                <li>{comments.comment}</li>
-                <li>-- {comments.author}, {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comments.date)))}</li>
-            </ul>    
+function RenderComments({comments, addComment, dishId}){
+    return(
+        <div>
+            {comments.map((comment)=>{
+                return(
+                    <div key={comment.id}>
+                        <ul className="list-unstyled">
+                            <li>{comment.comment}</li>
+                            <li>-- {comment.author}, {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</li>
+                        </ul>    
+                    </div>
+                );
+            })}
+            <CommentForm dishId={dishId} addComment={addComment}/>
         </div>
-        );
-    }));
+    );
 }
 
 const DishDetail = (props) => {
@@ -48,8 +53,7 @@ const DishDetail = (props) => {
                     </div>
                     <div className="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-xs-12 m-1">
                         <h4>Comments</h4>
-                        <RenderComments comments={props.comments}/>
-                        <CommentForm></CommentForm>
+                        <RenderComments comments={props.comments} addComment={props.addComment} dishId={props.selectedDish.id}/>
                     </div>
                 </div>
             </div>
@@ -84,8 +88,7 @@ class CommentForm extends Component{
 
     handleSubmit(values){
         this.toggleModal();
-        console.log("Current State Is: " + JSON.stringify(values));
-        alert("Current State Is: " + JSON.stringify(values));
+        this.props.addComment(this.props.dishId, values.rating, values.name, values.comment)
     }
 
     render(){
