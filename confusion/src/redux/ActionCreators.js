@@ -1,5 +1,4 @@
 import * as ActionTypes from './ActionTypes';
-import {DISHES} from '../shared/dishes';
 import {baseUrl} from '../shared/baseUrl';
 
 export const addComment = (comment) => ({
@@ -43,6 +42,46 @@ export const postComment = (dishId, rating, author, comment) => (dispatch) => {
         .then(response => dispatch(addComment(response)))
         .catch(error => {console.log('Post comments ' + error.message),
         alert('Your comment could not be posted\nError: ' + error.message)})
+}
+
+export const postFeedback = (feedback) => (dispatch) => {
+    const newFeedback = {
+        firstname: feedback.firstname,
+        lastname: feedback.lastname,
+        telnum: feedback.telnum,
+        email: feedback.email,
+        agree: feedback.agree,
+        contactType: feedback.contactType,
+        message: feedback.message        
+    }
+
+    newFeedback.date = new Date().toISOString();
+
+    return fetch(baseUrl + 'feedback', {
+        method: 'POST',
+        body: JSON.stringify(newFeedback),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'same-origin'
+    })
+        .then(response => {
+            if(response.ok){
+                return response;
+            }else{
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+        })
+        .then(response => response.json())
+        .then(response => alert('Thank you for you feedback!\n' + JSON.stringify(response)))
+        .catch(error => {console.log('Send feedback ' + error.message),
+        alert('Your feedback could not be sent\nError: ' + error.message)})
 }
 
 export const fetchDishes = () => (dispatch) => {

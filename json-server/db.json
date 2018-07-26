@@ -309,6 +309,17 @@
       "message": "afadsfds",
       "date": "2017-12-04T09:41:49.890Z",
       "id": 1
+    },
+    {
+      "firstname": "Richard",
+      "lastname": "Johansen",
+      "telnum": "5834446969",
+      "email": "epic@guy.com",
+      "agree": true,
+      "contactType": "Tel.",
+      "message": "I don't feel so good",
+      "date": "2018-07-26T21:05:08.194Z",
+      "id": 2
     }
   ]
 }
