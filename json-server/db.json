@@ -239,6 +239,14 @@
       "comment": "this is epic",
       "date": "2018-07-26T18:38:25.979Z",
       "id": 24
+    },
+    {
+      "dishId": 1,
+      "rating": "5",
+      "author": "Bulk",
+      "comment": "very nice yes",
+      "date": "2018-07-26T19:09:22.149Z",
+      "id": 25
     }
   ],
   "promotions": [
