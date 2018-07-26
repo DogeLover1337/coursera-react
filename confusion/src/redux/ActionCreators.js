@@ -40,7 +40,7 @@ export const postComment = (dishId, rating, author, comment) => (dispatch) => {
         })
         .then(response => response.json())
         .then(response => dispatch(addComment(response)))
-        .catch(error => {console.log('Post comments ' + error.message),
+        .catch(error => {console.log('Post comments ' + error.message)
         alert('Your comment could not be posted\nError: ' + error.message)})
 }
 
@@ -80,7 +80,7 @@ export const postFeedback = (feedback) => (dispatch) => {
         })
         .then(response => response.json())
         .then(response => alert('Thank you for you feedback!\n' + JSON.stringify(response)))
-        .catch(error => {console.log('Send feedback ' + error.message),
+        .catch(error => {console.log('Send feedback ' + error.message)
         alert('Your feedback could not be sent\nError: ' + error.message)})
 }
 
